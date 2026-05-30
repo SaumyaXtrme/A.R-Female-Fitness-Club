@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tab Title and Exercise Logo Icon -->
+    <title>A.R Female Fitness Club</title>
+    <link rel="icon" href="https://img.icons8.com/ios-filled/50/ff3366/dumbbell.png" type="image/png">
+    
+    <style>
+        :root {
+            --bg-dark: #0f1115;
+            --bg-card: #181b22;
+            --accent-pink: #ff3366;
+            --accent-hover: #ff5588;
+            --text-light: #ffffff;
+            --text-gray: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 6%;
+            background-color: rgba(15, 17, 21, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 51, 102, 0.1);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-area span { color: var(--accent-pink); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover { color: var(--accent-pink); }
+
+        /* Hero / Introduction Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #1c1f26, #121418);
+            padding: 50px 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .intro-section h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .owners-tag {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+
+        .owners-tag strong { color: var(--text-light); }
+
+        .trainer-badge {
+            display: inline-block;
+            background-color: rgba(255, 51, 102, 0.1);
+            color: var(--accent-pink);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 51, 102, 0.2);
+        }
+
+        /* Section Heading layout */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Interactive Grid Plans */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .plan-card {
+            background-color: var(--bg-card);
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 40px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-pink);
+            box-shadow: 0 10px 25px rgba(255, 51, 102, 0.15);
+        }
+
+        .plan-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .plan-details {
+            display: none;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .price-row span { color: var(--accent-pink); }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            background-color: var(--accent-pink);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+
+        .btn:hover { background-color: var(--accent-hover); }
+
+        /* Rules & Registration Panels */
+        .info-panel {
+            background-color: var(--bg-card);
+            border-radius: 14px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        /* Registration Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: var(--bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-pink);
+        }
+
+        /* Payment Simulation Screen */
+        .payment-box {
+            display: none;
+            background: #1e222b;
+            border: 1px dashed var(--accent-pink);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Admin Dashboard Views */
+        .admin-auth, .admin-dashboard {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        th { background-color: rgba(0,0,0,0.3); color: var(--accent-pink); }
+
+        .status-paid {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-area">
+            <img src="https://img.icons8.com/ios-filled/40/ff3366/dumbbell.png" alt="Dumbbell Icon">
+            A.R <span>FEMALE FITNESS</span>
+        </div>
+        <ul class="nav-links">
+            <li><a onclick="scrollToSec('plans')">Programs</a></li>
+            <li><a onclick="scrollToSec('rules')">Club Rules</a></li>
+            <li><a onclick="scrollToSec('register')">Join Online</a></li>
+            <li><a onclick="scrollToSec('admin')">Admin Terminal</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <!-- Header Info Card -->
+        <section class="intro-section">
+            <h1>A.R Female Fitness Club</h1>
+            <p class="owners-tag">Managed by Owners: <strong>Mrs. Archana Bharti</strong> & <strong>Mrs. Ritu Tiwari</strong></p>
+            <span class="trainer-badge">Head Trainer: Mrs. Archana Bharti</span>
+        </section>
+
+        <!-- Program Plans Section -->
+        <section id="plans">
+            <h2 class="section-title">Our Club Programs</h2>
+            <div class="plans-grid">
+                
+                <!-- Dance Plan -->
+                <div class="plan-card" onclick="togglePlan('dance')">
+                    <h3>Dance Classes</h3>
+                    <p style="color: var(--text-gray); margin-top: 10px;">Click to view schedules and styles.</p>
+                    <div id="dance-details" class="plan-details">
+                        <p style="font-style: italic; color: var(--text-gray);">Details arriving soon. Stay tuned!</p>
+                    </div>
+                </div>
+
+                <!-- Gym Plan -->
+                <div class="plan-card" onclick="togglePlan('gym')">
+                    <h3>Gym Membership</h3>
+                    <p style="color: var(--text-gray); margin-top: 10px;">Click to show pricing structures.</p>
+                    <div id="gym-details" class="plan-details">
+                        <div class="price-row">
+                            <span>Offline Access</span>
+                            <span>₹1000 / Month</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Online Coaching</span>
+                            <span>₹1000 / Month</span>
+                        </div>
+                        <button class="btn" onclick="openRegistrationFromPlan(event)">Select Plan & Join</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Temporary Rules Template Placeholder -->
+        <section id="rules" class="info-panel">
+            <h2 class="section-title" style="margin-bottom: 20px;">Club Guidelines & Rules</h2>
+            <p style="text-align: center; color: var(--text-gray); font-style: italic;">
+                Rules structural outline under draft review. Specific guidelines will be finalized during operational briefings.
+            </p>
+        </section>
+
+        <!-- Dynamic Lead Capture & Payment Form -->
+        <section id="register" class="info-panel">
+            <h2 class="section-title">Online Joining Portal</h2>
+            <form id="regForm" onsubmit="submitRegistration(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="clientName" required placeholder="Enter member name">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="clientPhone" required placeholder="Enter active phone number">
+                </div>
+                <div class="form-group">
+                    <label>Selected Stream</label>
+                    <select id="clientStream" onchange="checkStream()">
+                        <option value="Gym - Online">Gym (Online Setup - ₹1000)</option>
+                        <option value="Gym - Offline">Gym (Offline Setup - ₹1000)</option>
+                        <option value="Dance">Dance Batch</option>
+                    </select>
+                </div>
+
+                <!-- Live Dummy Online Payment Processing Checkbox -->
+                <div id="paymentContainer" class="payment-box">
+                    <h4 style="color: var(--accent-pink); margin-bottom: 10px;">💳 Built-in Razorpay / UPI Secure Portal</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 12px; color: var(--text-gray);">Amount Due: <strong>₹1000</strong></p>
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" id="payCheck" style="width: auto; transform: scale(1.2);">
+                        Authorize Online Net-Banking Transaction
+                    </label>
+                </div>
+
+                <button type="submit" class="btn" style="margin-top: 25px;">Complete Submission</button>
+            </form>
+        </section>
+
+        <!-- Secured Single-Page Admin View -->
+        <section id="admin" class="info-panel">
+            <h2 class="section-title" style="color: var(--accent-pink);">Secure Owner Terminal</h2>
+            
+            <!-- Auth Form Entry -->
+            <div id="adminAuth" class="admin-auth" style="display: block; text-align: center; max-width: 400px; margin: 0 auto;">
+                <p style="margin-bottom: 15px; color: var(--text-gray);">Access limited strictly to Dev / Admins.</p>
+                <input type="password" id="adminPass" placeholder="Enter Access Password" style="width: 100%; padding: 12px; margin-bottom: 15px; background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
+                <button class="btn" onclick="verifyAdminAccess()">Authorize Dashboard</button>
+            </div>
+
+            <!-- Main Data Table Dashboard -->
+            <div id="adminDashboard" class="admin-dashboard">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>Verified Member Registrations</h3>
+                    <button class="btn" style="width: auto; padding: 6px 15px; margin: 0;" onclick="loadRegistrations()">Refresh Feeds</button>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Contact Line</th>
+                                <th>Selected Stream</th>
+                                <th>Payment Type</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrationTableBody">
+                            <!-- Injected dynamically via script array hooks -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function scrollToSec(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function togglePlan(type) {
+            const block = document.getElementById(`${type}-details`);
+            block.style.display = (block.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function openRegistrationFromPlan(event) {
+            event.stopPropagation();
+            document.getElementById('clientStream').value = "Gym - Offline";
+            checkStream();
+            scrollToSec('register');
+        }
+
+        function checkStream() {
+            const stream = document.getElementById('clientStream').value;
+            const payBox = document.getElementById('paymentContainer');
+            if(stream.includes("Gym")) {
+                payBox.style.display = "block";
+            } else {
+                payBox.style.display = "none";
+                document.getElementById('payCheck').checked = false;
+            }
+        }
+
+        // Initialize state check on render
+        checkStream();
+
+        // Submits user object context data array seamlessly to internal node app router paths
+        async function submitRegistration(e) {
+            e.preventDefault();
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+            const stream = document.getElementById('clientStream').value;
+            const isPaid = document.getElementById('payCheck').checked;
+
+            const payload = {
+                name,
+                phone,
+                stream,
+                paymentStatus: isPaid ? "Paid (Online)" : "Pending (Pay at Desk)"
+            };
+
+            try {
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (res.ok) {
+                    alert(`Submission Complete! Welcome to A.R Club, ${name}.`);
+                    document.getElementById('regForm').reset();
+                    checkStream();
+                } else {
+                    alert("Submission failed to write to backend routing framework arrays.");
+                }
+            } catch (err) {
+                alert("Cannot find backend server network runtime array. Run node app framework scripts first.");
+            }
+        }
+
+        // Handles local UI authentication validation checks asynchronously 
+        async function verifyAdminAccess() {
+            const inputPass = document.getElementById('adminPass').value;
+            try {
+                const res = await fetch('/api/admin/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pass: inputPass })
+                });
+
+                if (res.ok) {
+                    document.getElementById('adminAuth').style.display = 'none';
+                    document.getElementById('adminDashboard').style.display = 'block';
+                    loadRegistrations();
+                } else {
+                    alert("Unauthorized entry access key credential sequence mismatch error.");
+                }
+            } catch (err) {
+                alert("Backend data route context node process missing runtime verification loops.");
+            }
+        }
+
+        async function loadRegistrations() {
+            try {
+                const res = await fetch('/api/admin/registrations');
+                if (res.ok) {
+                    const records = await res.json();
+                    const tbody = document.getElementById('registrationTableBody');
+                    tbody.innerHTML = '';
+                    
+                    if(records.length === 0) {
+                        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color: var(--text-gray)">No client registration feeds recorded inside active system state.</td></tr>`;
+                        return;
+                    }
+
+                    records.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.name}</td>
+                            <td>${item.phone}</td>
+                            <td>${item.stream}</td>
+                            <td><span class="${item.paymentStatus.includes('Paid') ? 'status-paid' : ''}" style="${!item.paymentStatus.includes('Paid') ? 'color: #f59e0b; background: rgba(245,158,11,0.1); padding: 4px 8px; border-radius:4px; font-size:0.85rem;' : ''}">${item.paymentStatus}</span></td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                }
+            } catch(e) {
+                console.error("Data pipeline pull fetch loop arrays connection breaks.", e);
+            }
+        }
+    </script>
+</body>
+</html>
